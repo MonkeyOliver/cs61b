@@ -10,10 +10,10 @@ public class ArrayDeque<T> {
      * Creates an empty list.
      */
     public ArrayDeque() {
-        items = (T[]) new Object[100];
+        items = (T[]) new Object[8];
         size = 0;
-        headIndex = 0;
-        tailIndex = 0;
+        headIndex = 1;
+        tailIndex = 1;
     }
 
     /**
@@ -32,7 +32,10 @@ public class ArrayDeque<T> {
         }
         headIndex--;
         if (headIndex < 0) {
-            headIndex = size - headIndex;
+            headIndex = items.length - 1;
+        }
+        if (headIndex == tailIndex) {
+            tailIndex++;
         }
         items[headIndex] = x;
         size = size + 1;
@@ -42,9 +45,9 @@ public class ArrayDeque<T> {
         if (size == items.length) {
             resize(size * 2);
         }
-        size++;
         tailIndex++;
         items[tailIndex - 1] = x;
+        size++;
     }
 
     /**
@@ -83,6 +86,9 @@ public class ArrayDeque<T> {
         T x = getfirst();
         items[headIndex] = null;
         headIndex++;
+        if (headIndex == items.length) {
+            headIndex = 0;
+        }
         size--;
         if (size < items.length / 4) {
             resize(items.length / 4);
@@ -110,7 +116,7 @@ public class ArrayDeque<T> {
 
     public void printDeque() {
         for (int i = headIndex; i < headIndex + size; i++) {
-            System.out.print(items[i % size]);
+            System.out.print(items[i % items.length]);
             System.out.print(" ");
         }
         System.out.println();
@@ -118,13 +124,13 @@ public class ArrayDeque<T> {
 
     public static void main(String[] args) {
         ArrayDeque<Integer> testQueue = new ArrayDeque<>();
-//        testQueue.addFirst(2);
-//        testQueue.addFirst(3);
+        testQueue.addFirst(2);
+        testQueue.removeFirst();
+        testQueue.addFirst(3);
         testQueue.addLast(5);
         testQueue.addLast(6);
         testQueue.addLast(7);
         testQueue.printDeque();
-        testQueue.removeFirst();
         testQueue.removeLast();
         testQueue.printDeque();
         System.out.println(testQueue.size());
