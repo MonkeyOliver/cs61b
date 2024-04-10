@@ -67,7 +67,7 @@ public class ArrayDeque<T> {
      * Gets the ith item in the list (0 is the front).
      */
     public T get(int i) {
-        return items[(headIndex + i) % size];
+        return items[(headIndex + 1 + i) % items.length];
     }
 
     /**
@@ -133,6 +133,7 @@ public class ArrayDeque<T> {
         testQueue.addLast(6);
         testQueue.addLast(7);
         testQueue.printDeque();
+        System.out.println(testQueue.get(2));
         testQueue.removeFirst();
         testQueue.removeLast();
         testQueue.printDeque();
