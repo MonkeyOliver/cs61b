@@ -87,11 +87,11 @@ public class ArrayDeque<T> {
         }
         T x = getfirst();
         headIndex++;
-        items[headIndex] = null;
         if (headIndex == items.length) {
             //TODO
             headIndex = 0;
         }
+        items[headIndex] = null;
         size--;
         if (size < items.length / 4) {
             resize(items.length / 4);
