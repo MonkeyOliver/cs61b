@@ -34,9 +34,6 @@ public class ArrayDeque<T> {
         }
         items[headIndex] = x;
         headIndex--;
-        if (headIndex < 0) {
-            headIndex = items.length - 1;
-        }
         size++;
     }
 
@@ -88,7 +85,6 @@ public class ArrayDeque<T> {
         T x = getfirst();
         headIndex++;
         if (headIndex == items.length) {
-            //TODO
             headIndex = 0;
         }
         items[headIndex] = null;
@@ -106,7 +102,6 @@ public class ArrayDeque<T> {
         T x = getLast();
         tailIndex--;
         if (tailIndex < 0) {
-            //TODO
             tailIndex = items.length - 1;
         }
         items[tailIndex] = null;
