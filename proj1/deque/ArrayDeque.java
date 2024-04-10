@@ -12,7 +12,7 @@ public class ArrayDeque<T> {
     public ArrayDeque() {
         items = (T[]) new Object[8];
         size = 0;
-        headIndex = 0;
+        headIndex = 7;
         tailIndex = 0;
     }
 
@@ -33,9 +33,6 @@ public class ArrayDeque<T> {
             resize(size * 2);
         }
         items[headIndex] = x;
-        if (headIndex == tailIndex) {
-            tailIndex++;
-        }
         headIndex--;
         if (headIndex < 0) {
             headIndex = items.length - 1;
@@ -56,6 +53,9 @@ public class ArrayDeque<T> {
      * Returns the item from the back of the list.
      */
     public T getLast() {
+        if (tailIndex == 0) {
+            return items[items.length - 1];
+        }
         return items[tailIndex - 1];
     }
 
@@ -82,15 +82,15 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
-        //TODO
         if (size == 0) {
             return null;
         }
         T x = getfirst();
-        items[headIndex] = null;
         headIndex++;
-        if (headIndex == items.length + 1) {
-            headIndex = 1;
+        items[headIndex] = null;
+        if (headIndex == items.length) {
+            //TODO
+            headIndex = 0;
         }
         size--;
         if (size < items.length / 4) {
@@ -100,13 +100,16 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
-        //TODO
         if (size == 0) {
             return null;
         }
         T x = getLast();
-        items[tailIndex - 1] = null;
         tailIndex--;
+        if (tailIndex < 0) {
+            //TODO
+            tailIndex = items.length - 1;
+        }
+        items[tailIndex] = null;
         size--;
         if (size < items.length / 4) {
             resize(items.length / 4);
