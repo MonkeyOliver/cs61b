@@ -20,15 +20,19 @@ public class ArrayDeque<T> {
      * Resizes the underlying array to the target capacity.
      */
     private void resize(int capacity) {
-        //TODO: edge cases
+        // TODO: robust
         T[] a = (T[]) new Object[capacity];
         if (tailIndex <= headIndex) {
             if (tailIndex >= 0) System.arraycopy(items, 0, a, 0, tailIndex);
             if (items.length - (headIndex + 1) >= 0)
                 System.arraycopy(items, headIndex + 1, a, headIndex + 1 + capacity - items.length, items.length - (headIndex + 1));
             headIndex += capacity - items.length; // Update headIndex
-            items = a;
+        } else {
+            if (size >= 0) System.arraycopy(items, headIndex + 1, a, 0, size);
+            headIndex = a.length - 1;
+            tailIndex = size;
         }
+        items = a;
     }
 
     public void addFirst(T x) {
