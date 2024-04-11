@@ -42,6 +42,9 @@ public class ArrayDeque<T> {
         if (headIndex == tailIndex) {
             resize(items.length * 2);
         }
+        if (headIndex < 0) {
+            headIndex = items.length - 1;
+        }
     }
 
     public void addLast(T x) {
@@ -50,6 +53,9 @@ public class ArrayDeque<T> {
         size++;
         if (headIndex == tailIndex) {
             resize(items.length * 2);
+        }
+        if (tailIndex == items.length) {
+            tailIndex = 0;
         }
     }
 
