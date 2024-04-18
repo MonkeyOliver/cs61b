@@ -1,10 +1,10 @@
 package deque;
 
-public class ArrayDeque<T> {
-    private T[] items;
-    private int size;
-    private int headIndex;
-    private int tailIndex;
+public class ArrayDeque<T> implements Deque<T> {
+    protected T[] items;
+    protected int size;
+    protected int headIndex;
+    protected int tailIndex;
 
     /**
      * Creates an empty list.
@@ -35,6 +35,7 @@ public class ArrayDeque<T> {
         items = a;
     }
 
+    @Override
     public void addFirst(T x) {
         items[headIndex] = x;
         headIndex--;
@@ -47,6 +48,7 @@ public class ArrayDeque<T> {
         }
     }
 
+    @Override
     public void addLast(T x) {
         items[tailIndex] = x;
         tailIndex++;
@@ -76,6 +78,7 @@ public class ArrayDeque<T> {
     /**
      * Gets the ith item in the list (0 is the front).
      */
+    @Override
     public T get(int i) {
         return items[(headIndex + 1 + i) % items.length];
     }
@@ -83,14 +86,12 @@ public class ArrayDeque<T> {
     /**
      * Returns the number of items in the list.
      */
+    @Override
     public int size() {
         return size;
     }
 
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
+    @Override
     public T removeFirst() {
         if (size == 0) {
             return null;
@@ -108,6 +109,7 @@ public class ArrayDeque<T> {
         return x;
     }
 
+    @Override
     public T removeLast() {
         if (size == 0) {
             return null;
@@ -125,6 +127,7 @@ public class ArrayDeque<T> {
         return x;
     }
 
+    @Override
     public void printDeque() {
         for (int i = headIndex + 1; i <= headIndex + size; i++) {
             System.out.print(items[i % items.length]);
