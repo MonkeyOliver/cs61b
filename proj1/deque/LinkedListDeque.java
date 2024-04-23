@@ -37,14 +37,14 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     private int cnt;
     private Node first;
 
-    LinkedListDeque(T x) {
+    public LinkedListDeque(T x) {
         first = new Node(x, null, null);
         first.next = first;
         first.prev = first;
         cnt = 1;
     }
 
-    LinkedListDeque() {
+    public LinkedListDeque() {
         first = null;
         cnt = 0;
     }

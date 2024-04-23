@@ -30,7 +30,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
     /**
      * Creates an empty list.
      */
-    ArrayDeque() {
+    public ArrayDeque() {
         items = (T[]) new Object[8];
         size = 0;
         headIndex = 7;
