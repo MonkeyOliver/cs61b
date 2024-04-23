@@ -2,11 +2,11 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
+public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     protected T[] items;
-    protected int size;
+    private int size;
     protected int headIndex;
-    protected int tailIndex;
+    private int tailIndex;
 
     private class ArrayDequeIterator implements Iterator<T> {
         private int wizPos;
@@ -41,7 +41,6 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
      * Resizes the underlying array to the target capacity.
      */
     private void resize(int capacity) {
-        // TODO: robust
         T[] a = (T[]) new Object[capacity];
         if (tailIndex <= headIndex) {
             if (tailIndex >= 0) {
@@ -165,26 +164,5 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
             System.out.print(" ");
         }
         System.out.println();
-    }
-
-    public static void main(String[] args) {
-        ArrayDeque<Integer> testQueue = new ArrayDeque<>();
-        for (int i = 0; i < 2; i++) {
-            testQueue.addLast(i);
-        }
-        testQueue.addFirst(21);
-        testQueue.addFirst(32);
-        testQueue.removeFirst();
-        testQueue.removeLast();
-        testQueue.addFirst(55);
-        testQueue.addFirst(63);
-        testQueue.addFirst(93);
-        testQueue.addLast(7);
-        testQueue.printDeque();
-        System.out.println(testQueue.get(2));
-        testQueue.removeFirst();
-        testQueue.removeLast();
-        testQueue.printDeque();
-        System.out.println(testQueue.size());
     }
 }

@@ -38,7 +38,7 @@ public class LinkedListDequeTest {
     /** Adds an item, then removes an item, and ensures that dll is empty afterwards. */
     public void addRemoveTest() {
 
-        LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
 		// should be empty
 		assertTrue("lld1 should be empty upon initialization", lld1.isEmpty());
 
@@ -116,5 +116,18 @@ public class LinkedListDequeTest {
         for (double i = 999999; i > 500000; i--) {
             assertEquals("Should have the same value", i, (double) lld1.removeLast(), 0.0);
         }
+    }
+
+    @Test
+    public void addRemoveTest1() {
+
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+        lld1.isEmpty();
+        lld1.addFirst(1);
+        lld1.removeLast();
+        lld1.addFirst(3);
+        lld1.size();
+        lld1.size();
+        lld1.removeLast();
     }
 }

@@ -20,6 +20,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 
         LinkedListDequeIterator() {
             wizPos = first;
+            index = cnt;
         }
 
         public boolean hasNext() {
@@ -92,7 +93,9 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
                 first = null;
             }
             return p.item;
-        } else return null;
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -102,8 +105,13 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
             first.prev.prev.next = first;
             first.prev = first.prev.prev;
             cnt--;
+            if (cnt == 0) {
+                first = null;
+            }
             return p.item;
-        } else return null;
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -134,7 +142,9 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     public T getRecursive(int index) {
         if (cnt > 0) {
             return getRecursiveHelper(first, index);
-        } else return null;
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -157,22 +167,5 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
             index--;
         }
         System.out.println();
-    }
-
-    public static void main(String[] args) {
-        LinkedListDeque<Integer> testQueue = new LinkedListDeque<>();
-        testQueue.addLast(0);
-        testQueue.isEmpty();
-        testQueue.removeFirst();
-        testQueue.isEmpty();
-        testQueue.addLast(4);
-        testQueue.removeFirst();
-        System.out.println(testQueue.getRecursive(0));
-        System.out.println(testQueue.get(0));
-        testQueue.printDeque();
-        testQueue.removeFirst();
-        testQueue.removeLast();
-        testQueue.printDeque();
-        System.out.println(testQueue.size());
     }
 }
