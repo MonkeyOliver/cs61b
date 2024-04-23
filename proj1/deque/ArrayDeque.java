@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<T> implements Deque<T> {
+public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
     protected T[] items;
     protected int size;
     protected int headIndex;
@@ -11,7 +11,7 @@ public class ArrayDeque<T> implements Deque<T> {
     private class ArrayDequeIterator implements Iterator<T> {
         private int wizPos;
 
-        public ArrayDequeIterator() {
+        ArrayDequeIterator() {
             wizPos = 0;
         }
 
@@ -30,7 +30,7 @@ public class ArrayDeque<T> implements Deque<T> {
     /**
      * Creates an empty list.
      */
-    public ArrayDeque() {
+    ArrayDeque() {
         items = (T[]) new Object[8];
         size = 0;
         headIndex = 7;
@@ -44,12 +44,17 @@ public class ArrayDeque<T> implements Deque<T> {
         // TODO: robust
         T[] a = (T[]) new Object[capacity];
         if (tailIndex <= headIndex) {
-            if (tailIndex >= 0) System.arraycopy(items, 0, a, 0, tailIndex);
-            if (items.length - (headIndex + 1) >= 0)
+            if (tailIndex >= 0) {
+                System.arraycopy(items, 0, a, 0, tailIndex);
+            }
+            if (items.length - (headIndex + 1) >= 0) {
                 System.arraycopy(items, headIndex + 1, a, headIndex + 1 + capacity - items.length, items.length - (headIndex + 1));
+            }
             headIndex += capacity - items.length; // Update headIndex
         } else {
-            if (size >= 0) System.arraycopy(items, headIndex + 1, a, 0, size);
+            if (size >= 0) {
+                System.arraycopy(items, headIndex + 1, a, 0, size);
+            }
             headIndex = a.length - 1;
             tailIndex = size;
         }
@@ -85,14 +90,14 @@ public class ArrayDeque<T> implements Deque<T> {
     /**
      * Returns the item from the back of the list.
      */
-    public T getLast() {
+    private T getLast() {
         if (tailIndex == 0) {
             return items[items.length - 1];
         }
         return items[tailIndex - 1];
     }
 
-    public T getfirst() {
+    private T getfirst() {
         return items[(headIndex + 1) % items.length];
     }
 

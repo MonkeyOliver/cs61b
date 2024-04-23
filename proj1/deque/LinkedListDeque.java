@@ -2,12 +2,12 @@ package deque;
 
 import java.util.Iterator;
 
-public class LinkedListDeque<T> implements Deque<T> {
+public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     private class Node {
         Node next, prev;
         T item;
 
-        public Node(T i, Node n, Node p) {
+        Node(T i, Node n, Node p) {
             item = i;
             next = n;
             prev = p;
@@ -18,7 +18,7 @@ public class LinkedListDeque<T> implements Deque<T> {
         private Node wizPos;
         private int index;
 
-        public LinkedListDequeIterator() {
+        LinkedListDequeIterator() {
             wizPos = first;
         }
 
@@ -37,14 +37,14 @@ public class LinkedListDeque<T> implements Deque<T> {
     private int cnt;
     private Node first;
 
-    public LinkedListDeque(T x) {
+    LinkedListDeque(T x) {
         first = new Node(x, null, null);
         first.next = first;
         first.prev = first;
         cnt = 1;
     }
 
-    public LinkedListDeque() {
+    LinkedListDeque() {
         first = null;
         cnt = 0;
     }
@@ -88,6 +88,9 @@ public class LinkedListDeque<T> implements Deque<T> {
             first.next.prev = first.prev;
             first = first.next;
             cnt--;
+            if (cnt == 0) {
+                first = null;
+            }
             return p.item;
         } else return null;
     }
@@ -105,6 +108,9 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public T get(int index) {
+        if (cnt == 0) {
+            return null;
+        }
         Node p = first;
         while (index >= 0) {
             index--;
@@ -126,7 +132,9 @@ public class LinkedListDeque<T> implements Deque<T> {
     }
 
     public T getRecursive(int index) {
-        return getRecursiveHelper(first, index);
+        if (cnt > 0) {
+            return getRecursiveHelper(first, index);
+        } else return null;
     }
 
     @Override
@@ -152,11 +160,13 @@ public class LinkedListDeque<T> implements Deque<T> {
     }
 
     public static void main(String[] args) {
-        LinkedListDeque<Integer> testQueue = new LinkedListDeque<>(1);
-        testQueue.addFirst(2);
-        testQueue.addFirst(3);
-        testQueue.addLast(5);
-        testQueue.addLast(6);
+        LinkedListDeque<Integer> testQueue = new LinkedListDeque<>();
+        testQueue.addLast(0);
+        testQueue.isEmpty();
+        testQueue.removeFirst();
+        testQueue.isEmpty();
+        testQueue.addLast(4);
+        testQueue.removeFirst();
         System.out.println(testQueue.getRecursive(0));
         System.out.println(testQueue.get(0));
         testQueue.printDeque();
