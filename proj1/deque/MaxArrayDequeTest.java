@@ -6,15 +6,15 @@ import java.util.Comparator;
 
 import static org.junit.Assert.*;
 
-class IntComparator implements Comparator<Integer> {
-    @Override
-    public int compare(Integer o1, Integer o2) {
-        return o1 - o2;
-    }
-}
 
 public class MaxArrayDequeTest {
 
+    private static class IntComparator implements Comparator<Integer> {
+        @Override
+        public int compare(Integer o1, Integer o2) {
+            return o1 - o2;
+        }
+    }
 
     @Test
     /** Adds an item, then removes an item, and ensures that dll is empty afterwards. */
