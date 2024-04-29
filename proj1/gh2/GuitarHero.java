@@ -16,7 +16,7 @@ public class GuitarHero {
 
         for (int i = 0; i < KEYBOARD.length(); i++) {
             char c = KEYBOARD.charAt(i);
-            strings[i] = new GuitarString(CONCERT_A * Math.pow(2, (double)(i - 24)/12));
+            strings[i] = new GuitarString(CONCERT_A * Math.pow(2, (double) (i - 24) / 12));
         }
 
         while (true) {
@@ -32,7 +32,6 @@ public class GuitarHero {
             for (int i = 0; i < KEYBOARD.length(); i++) {
                 sample += strings[i].sample();
             }
-            System.out.println(sample);
 
             /* play the sample on standard audio */
             StdAudio.play(sample);

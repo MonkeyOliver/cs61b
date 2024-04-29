@@ -3,7 +3,7 @@ package deque;
 import java.util.Iterator;
 
 public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
-    protected T[] items;
+    private T[] items;
     private int size;
     protected int headIndex;
     private int tailIndex;
@@ -102,7 +102,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         return items[tailIndex - 1];
     }
 
-    private T getfirst() {
+    public T getfirst() {
         return items[(headIndex + 1) % items.length];
     }
 

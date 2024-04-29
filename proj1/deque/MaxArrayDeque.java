@@ -15,10 +15,10 @@ public class MaxArrayDeque<T> extends ArrayDeque<T> {
         if (isEmpty()) {
             return null;
         }
-        T ans = get(headIndex + 1);
+        T ans = getfirst();
         for (int i = headIndex + 1; i <= headIndex + size(); i++) {
-            T val = get(i % items.length);
-            if (val != null && cp.compare(ans, val) >= 0) {
+            T val = get(i);
+            if (val != null && ans != null && cp.compare(ans, val) <= 0) {
                 ans = val;
             }
         }
@@ -29,10 +29,10 @@ public class MaxArrayDeque<T> extends ArrayDeque<T> {
         if (isEmpty()) {
             return null;
         }
-        T ans = get(headIndex + 1);
+        T ans = getfirst();
         for (int i = headIndex + 1; i <= headIndex + size(); i++) {
-            T val = get(i % items.length);
-            if (val != null && c.compare(ans, val) >= 0) {
+            T val = get(i);
+            if (val != null && ans != null && c.compare(ans, val) <= 0) {
                 ans = val;
             }
         }
