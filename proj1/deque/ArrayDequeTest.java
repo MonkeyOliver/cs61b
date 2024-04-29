@@ -80,4 +80,28 @@ public class ArrayDequeTest {
         assertEquals("Should return null when removeFirst is called on an empty Deque,", null, lld1.removeFirst());
         assertEquals("Should return null when removeLast is called on an empty Deque,", null, lld1.removeLast());
     }
+
+    @Test
+    /** Adds an item, then removes an item, and ensures that dll is empty afterwards. */
+    public void addRemoveTest2() {
+
+        ArrayDeque<Integer> lld1 = new ArrayDeque<Integer>();
+        lld1.addFirst(0);
+        lld1.removeFirst();
+        lld1.addLast(2);
+        lld1.addFirst(3);
+        lld1.addLast(4);
+        lld1.addFirst(5);
+        lld1.removeFirst();
+        lld1.removeLast();
+        lld1.removeFirst();
+        lld1.get(0);
+        lld1.removeLast();
+        lld1.addFirst(11);
+        lld1.get(0);
+        lld1.addFirst(13);
+        lld1.get(0);
+        lld1.addLast(15);
+        lld1.removeFirst();
+    }
 }

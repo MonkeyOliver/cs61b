@@ -44,7 +44,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         T[] a = (T[]) new Object[capacity];
         if (tailIndex <= headIndex) {
             if (tailIndex >= 0) {
-                System.arraycopy(items, 0, a, 0, tailIndex);
+                System.arraycopy(items, 0, a, 0, tailIndex + 1);
             }
             if (items.length - (headIndex + 1) >= 0) {
                 System.arraycopy(items, headIndex + 1, a, headIndex + 1 + capacity - items.length, items.length - (headIndex + 1));
@@ -65,11 +65,11 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         items[headIndex] = x;
         headIndex--;
         size++;
-        if (headIndex == tailIndex) {
-            resize(items.length * 2);
-        }
         if (headIndex < 0) {
             headIndex = items.length - 1;
+        }
+        if (headIndex == tailIndex) {
+            resize(items.length * 2);
         }
     }
 
@@ -78,11 +78,11 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         items[tailIndex] = x;
         tailIndex++;
         size++;
-        if (headIndex == tailIndex) {
-            resize(items.length * 2);
-        }
         if (tailIndex == items.length) {
             tailIndex = 0;
+        }
+        if (headIndex == tailIndex) {
+            resize(items.length * 2);
         }
     }
 
