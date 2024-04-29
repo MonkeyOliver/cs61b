@@ -62,6 +62,9 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
     @Override
     public void addFirst(T x) {
+        if (headIndex == tailIndex) {
+            resize(items.length * 2);
+        }
         items[headIndex] = x;
         headIndex--;
         size++;
@@ -75,6 +78,9 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
     @Override
     public void addLast(T x) {
+        if (headIndex == tailIndex) {
+            resize(items.length * 2);
+        }
         items[tailIndex] = x;
         tailIndex++;
         size++;
