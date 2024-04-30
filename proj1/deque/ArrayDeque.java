@@ -199,7 +199,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         }
         int oidx = other.headIndex + 1;
         for (int i = getHeadIndex(); i < getHeadIndex() + size; i++) {
-            if (this.items[i % items.length] != other.items[oidx % other.items.length]) {
+            if (!this.items[i % items.length].equals(other.items[oidx % other.items.length])) {
                 return false;
             }
             oidx++;

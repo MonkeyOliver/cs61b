@@ -182,7 +182,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         }
         Node p = other.first;
         for (T item : this) {
-            if (item != p.item) {
+            if (!item.equals(p.item)) {
                 return false;
             }
             p = p.next;
