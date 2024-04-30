@@ -157,21 +157,37 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         if (this == o) {
             return true;
         }
-        if (o instanceof LinkedListDeque<?> other) {
-            if (this.size() != other.size()) {
-                return false;
-            }
-            Node p = (Node) other.first;
-            for (T item : this) {
-                if (item != p.item) {
-                    return false;
-                }
-                p = p.next;
-            }
-            return true;
-        } else {
+        // Use instanceof like code below can be compiled in Java16 but can not be compiled on gradescope.
+//        if (o instanceof LinkedListDeque<?> other) {
+//            if (this.size() != other.size()) {
+//                return false;
+//            }
+//            Node p = (Node) other.first;
+//            for (T item : this) {
+//                if (item != p.item) {
+//                    return false;
+//                }
+//                p = p.next;
+//            }
+//            return true;
+//        } else {
+//            return false;
+//        }
+        if (this.getClass() != o.getClass()) {
             return false;
         }
+        LinkedListDeque<T> other = (LinkedListDeque<T>) o;
+        if (this.size() != other.size()) {
+            return false;
+        }
+        Node p = other.first;
+        for (T item : this) {
+            if (item != p.item) {
+                return false;
+            }
+            p = p.next;
+        }
+        return true;
     }
 
 

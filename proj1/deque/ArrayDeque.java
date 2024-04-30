@@ -174,21 +174,37 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         if (this == o) {
             return true;
         }
-        if (o instanceof ArrayDeque<?> other) {
-            if (this.size() != other.size()) {
-                return false;
-            }
-            int oidx = other.getHeadIndex();
-            for (int i = getHeadIndex(); i < getHeadIndex() + size; i++) {
-                if (this.get(i) != other.get(oidx)) {
-                    return false;
-                }
-                oidx++;
-            }
-            return true;
-        } else {
+        // Use instanceof like code below can be compiled in Java16 but can not be compiled on gradescope.
+//        if (o instanceof ArrayDeque<?> other) {
+//            if (this.size() != other.size()) {
+//                return false;
+//            }
+//            int oidx = other.getHeadIndex();
+//            for (int i = getHeadIndex(); i < getHeadIndex() + size; i++) {
+//                if (this.get(i) != other.get(oidx)) {
+//                    return false;
+//                }
+//                oidx++;
+//            }
+//            return true;
+//        } else {
+//            return false;
+//        }
+        if (this.getClass() != o.getClass()) {
             return false;
         }
+        ArrayDeque<T> other = (ArrayDeque<T>) o;
+        if (this.size() != other.size()) {
+            return false;
+        }
+        int oidx = other.getHeadIndex();
+        for (int i = getHeadIndex(); i < getHeadIndex() + size; i++) {
+            if (this.get(i) != other.get(oidx)) {
+                return false;
+            }
+            oidx++;
+        }
+        return true;
     }
 
     @Override
