@@ -5,7 +5,7 @@ import java.util.Iterator;
 public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     private T[] items;
     private int size;
-    protected int headIndex;
+    private int headIndex;
     private int tailIndex;
 
     private class ArrayDequeIterator implements Iterator<T> {
@@ -102,8 +102,12 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         return items[tailIndex - 1];
     }
 
-    public T getfirst() {
+    private T getfirst() {
         return items[(headIndex + 1) % items.length];
+    }
+
+    public int getHeadIndex(){
+        return headIndex + 1;
     }
 
     /**
@@ -162,11 +166,35 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         return new ArrayDequeIterator();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (this == o) {
+            return true;
+        }
+        if (o instanceof ArrayDeque<?> other) {
+            if (this.size() != other.size()) {
+                return false;
+            }
+            int oidx = other.getHeadIndex();
+            for (int i = getHeadIndex(); i < getHeadIndex() + size; i++) {
+                if (this.get(i) != other.get(oidx)) {
+                    return false;
+                }
+                oidx++;
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     @Override
     public void printDeque() {
-        for (int i = headIndex + 1; i <= headIndex + size; i++) {
-            System.out.print(items[i % items.length]);
+        for (int i = getHeadIndex(); i < getHeadIndex() + size; i++) {
+            System.out.print(get(i));
             System.out.print(" ");
         }
         System.out.println();

@@ -38,13 +38,6 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     private int cnt;
     private Node first;
 
-    public LinkedListDeque(T x) {
-        first = new Node(x, null, null);
-        first.next = first;
-        first.prev = first;
-        cnt = 1;
-    }
-
     public LinkedListDeque() {
         first = null;
         cnt = 0;
@@ -155,6 +148,32 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     public Iterator<T> iterator() {
         return new LinkedListDequeIterator();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (this == o) {
+            return true;
+        }
+        if (o instanceof LinkedListDeque<?> other) {
+            if (this.size() != other.size()) {
+                return false;
+            }
+            Node p = (Node) other.first;
+            for (T item : this) {
+                if (item != p.item) {
+                    return false;
+                }
+                p = p.next;
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     @Override
     public void printDeque() {

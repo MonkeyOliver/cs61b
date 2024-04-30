@@ -103,4 +103,25 @@ public class ArrayDequeTest {
         lld1.addLast(14);
         System.out.println(lld1.get(2));
     }
+
+    @Test
+    public void equalTest() {
+        ArrayDeque<Integer> lld1 = new ArrayDeque<>();
+        ArrayDeque<Integer> lld2 = new ArrayDeque<>();
+        for (int i = 0; i < 5; i++) {
+            lld1.addLast(i);
+            lld2.addLast(i);
+        }
+        assertEquals("lld1 equals to lld2", lld1, lld2);
+        lld1.removeFirst();
+        assertNotEquals("lld1 does not equal to lld2", lld1, lld2);
+        lld2.removeFirst();
+        assertEquals("lld1 equals to lld2", lld1, lld2);
+        lld1.addLast(12);
+        lld2.addLast(13);
+        assertNotEquals("lld1 does not equal to lld2", lld1, lld2);
+        lld2.removeLast();
+        lld2.addLast(12);
+        assertEquals("lld1 equals to lld2", lld1, lld2);
+    }
 }
