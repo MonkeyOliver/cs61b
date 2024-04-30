@@ -31,5 +31,9 @@ public class MaxArrayDequeTest {
         lld1.removeFirst();
         // should be empty
         assertTrue("lld1 should be empty after removal", lld1.isEmpty());
+        for (int i = 0; i < 5; i++) {
+            lld1.addLast(i);
+        }
+        System.out.println(lld1.max());
     }
 }
