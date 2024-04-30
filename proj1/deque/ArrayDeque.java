@@ -47,7 +47,9 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
                 System.arraycopy(items, 0, a, 0, tailIndex + 1);
             }
             if (items.length - (headIndex + 1) >= 0) {
-                System.arraycopy(items, headIndex + 1, a, headIndex + 1 + capacity - items.length, items.length - (headIndex + 1));
+                System.arraycopy(items, headIndex + 1, a,
+                        headIndex + 1 + capacity - items.length,
+                        items.length - (headIndex + 1));
             }
             headIndex += capacity - items.length; // Update headIndex
         } else {
@@ -106,7 +108,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         return items[(headIndex + 1) % items.length];
     }
 
-    public int getHeadIndex(){
+    private int getHeadIndex() {
         return headIndex + 1;
     }
 
@@ -174,35 +176,33 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         if (this == o) {
             return true;
         }
-        // Use instanceof like code below can be compiled in Java16 but can not be compiled on gradescope.
-//        if (o instanceof ArrayDeque<?> other) {
+        // Use instanceof like code below can be
+        // compiled in Java16 but can not be
+        // compiled on gradescope.
+//        if (o instanceof Deque<?> other) {
 //            if (this.size() != other.size()) {
 //                return false;
 //            }
-//            int oidx = other.getHeadIndex();
-//            for (int i = getHeadIndex(); i < getHeadIndex() + size; i++) {
-//                if (this.get(i) != other.get(oidx)) {
+//            for (int i = 0; i < size(); i++) {
+//                if (!this.get(i).equals(other.get(i))) {
 //                    return false;
 //                }
-//                oidx++;
 //            }
 //            return true;
 //        } else {
 //            return false;
 //        }
-        if (this.getClass() != o.getClass()) {
+        if (!(o instanceof Deque)) {
             return false;
         }
-        ArrayDeque<T> other = (ArrayDeque<T>) o;
+        Deque<T> other = (Deque<T>) o;
         if (this.size() != other.size()) {
             return false;
         }
-        int oidx = other.headIndex + 1;
-        for (int i = getHeadIndex(); i < getHeadIndex() + size; i++) {
-            if (!this.items[i % items.length].equals(other.items[oidx % other.items.length])) {
+        for (int i = 0; i < size(); i++) {
+            if (!this.get(i).equals(other.get(i))) {
                 return false;
             }
-            oidx++;
         }
         return true;
     }
