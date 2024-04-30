@@ -135,6 +135,7 @@ public class LinkedListDequeTest {
     public void equalTest() {
         LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
         LinkedListDeque<Integer> lld2 = new LinkedListDeque<>();
+        assertEquals("lld1 equals to lld2", lld1, lld2);
         for (int i = 0; i < 5; i++) {
             lld1.addLast(i);
             lld2.addLast(i);

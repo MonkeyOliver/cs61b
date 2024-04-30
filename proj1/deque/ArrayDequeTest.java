@@ -108,6 +108,7 @@ public class ArrayDequeTest {
     public void equalTest() {
         ArrayDeque<Integer> lld1 = new ArrayDeque<>();
         ArrayDeque<Integer> lld2 = new ArrayDeque<>();
+        assertEquals("lld1 equals to lld2", lld1, lld2);
         for (int i = 0; i < 5; i++) {
             lld1.addLast(i);
             lld2.addLast(i);
